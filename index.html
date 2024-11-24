@@ -3,40 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Mia Pagina GitHub</title>
+    <title>Mio Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 </head>
 <body>
+    <div id="background-3d"></div>
+    
     <header>
-        <h1>Benvenuto nella mia pagina GitHub!</h1>
         <nav>
+            <div class="logo">
+                <h1>Nome Cognome</h1>
+            </div>
             <ul>
-                <li><a href="#about">Chi Sono</a></li>
-                <li><a href="#projects">Progetti</a></li>
-                <li><a href="#contact">Contatti</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#progetti">Progetti</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contatti">Contatti</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section id="about">
-            <h2>Chi Sono</h2>
-            <p>Mi chiamo [Il Tuo Nome] e sono uno sviluppatore appassionato di tecnologia e programmazione.</p>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Sviluppatore Web & Designer</h2>
+                <p>Creazione di esperienze digitali innovative</p>
+                <div class="cta-buttons">
+                    <a href="#progetti" class="btn btn-primary">Vedi Progetti</a>
+                    <a href="#contatti" class="btn btn-secondary">Contattami</a>
+                </div>
+            </div>
         </section>
-        <section id="projects">
-            <h2>Progetti</h2>
-            <ul>
-                <li><a href="https://github.com/tuo-username/progetto1">Progetto 1</a></li>
-                <li><a href="https://github.com/tuo-username/progetto2">Progetto 2</a></li>
-                <li><a href="https://github.com/tuo-username/progetto3">Progetto 3</a></li>
-            </ul>
+
+        <section id="progetti" class="projects">
+            <h2>Progetti GitHub</h2>
+            <div class="projects-grid">
+                <!-- Inserire card dei progetti -->
+                <div class="project-card">
+                    <img src="progetto1.jpg" alt="Progetto 1">
+                    <h3>Nome Progetto</h3>
+                    <p>Descrizione breve</p>
+                    <a href="#" class="btn">Vedi su GitHub</a>
+                </div>
+                <!-- Altre card -->
+            </div>
         </section>
-        <section id="contact">
-            <h2>Contatti</h2>
-            <p>Puoi contattarmi via email a <a href="mailto:tuo-email@example.com">tuo-email@example.com</a>.</p>
+
+        <section id="skills" class="skills">
+            <h2>Tech Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                </div>
+                <!-- Altre skill -->
+            </div>
+        </section>
+
+        <section id="contatti" class="contact">
+            <h2>Contattami</h2>
+            <form>
+                <input type="text" placeholder="Nome">
+                <input type="email" placeholder="Email">
+                <textarea placeholder="Messaggio"></textarea>
+                <button type="submit" class="btn">Invia</button>
+            </form>
         </section>
     </main>
+
     <footer>
-        <p>&copy; 2023 [Il Tuo Nome]. Tutti i diritti riservati.</p>
+        <div class="social-links">
+            <a href="#" class="social-icon">GitHub</a>
+            <a href="#" class="social-icon">LinkedIn</a>
+        </div>
+        <p>&copy; 2024 Nome Cognome. Tutti i diritti riservati.</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
