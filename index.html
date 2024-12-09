@@ -3,86 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Shield Generator</title>
+  <title>Shield Generator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
+      text-align: center;
       padding: 20px;
-      background-color: #f4f4f4;
     }
-    h1 {
-      color: #333;
-    }
-    #shieldPreview {
+    .shield-preview {
       margin: 20px 0;
     }
-    a {
-      color: #007BFF;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+    input, button {
+      padding: 10px;
+      margin: 5px;
     }
   </style>
 </head>
 <body>
   <h1>Custom Shield Generator</h1>
-  <p>Generate your own shield by adding parameters to the URL:</p>
-  <ul>
-    <li><strong>label</strong>: The left text (e.g., <code>?label=Build</code>)</li>
-    <li><strong>message</strong>: The right text (e.g., <code>&message=Passing</code>)</li>
-    <li><strong>labelColor</strong>: Hex color for the label background (e.g., <code>&labelColor=%23ff5733</code>)</li>
-    <li><strong>messageColor</strong>: Hex color for the message background (e.g., <code>&messageColor=%234c1</code>)</li>
-  </ul>
-  <p>Example URL: <code>?label=Build&message=Passing&labelColor=%23ff5733&messageColor=%234c1</code></p>
-
-  <div id="shieldPreview">
-    <p>Loading your shield...</p>
+  <div>
+    <label>
+      Label:
+      <input type="text" id="label" placeholder="Enter label" />
+    </label>
+    <label>
+      Message:
+      <input type="text" id="message" placeholder="Enter message" />
+    </label>
+    <label>
+      Label Color:
+      <input type="color" id="labelColor" value="#555" />
+    </label>
+    <label>
+      Message Color:
+      <input type="color" id="messageColor" value="#4c1" />
+    </label>
+    <button onclick="generateShield()">Generate Shield</button>
   </div>
-
-  <p>
-    Link to use in README.md:<br />
-    <a id="shieldLink" href="#" target="_blank">Loading...</a>
-  </p>
-
-  <script>
-    function getQueryParams() {
-      const params = new URLSearchParams(window.location.search);
-      return {
-        label: params.get("label") || "Label",
-        message: params.get("message") || "Message",
-        labelColor: params.get("labelColor") || "#555",
-        messageColor: params.get("messageColor") || "#4c1",
-      };
-    }
-
-    function generateShield(label, message, labelColor, messageColor) {
-      return `
-        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30">
-          <rect width="75" height="30" fill="${labelColor}" />
-          <rect x="75" width="75" height="30" fill="${messageColor}" />
-          <text x="37.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${label}</text>
-          <text x="112.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${message}</text>
-        </svg>
-      `;
-    }
-
-    function updateShield() {
-      const { label, message, labelColor, messageColor } = getQueryParams();
-      const svg = generateShield(label, message, labelColor, messageColor);
-
-      // Show the shield
-      document.getElementById("shieldPreview").innerHTML = svg;
-
-      // Generate the link
-      const link = `${window.location.origin}${window.location.pathname}?label=${encodeURIComponent(label)}&message=${encodeURIComponent(message)}&labelColor=${encodeURIComponent(labelColor)}&messageColor=${encodeURIComponent(messageColor)}`;
-      const linkElement = document.getElementById("shieldLink");
-      linkElement.textContent = link;
-      linkElement.href = link;
-    }
-
-    updateShield();
-  </script>
+  <div>
+    <h2>Your Shield</h2>
+    <div id="shieldPreview"></div>
+    <p>
+      Link to use in README.md:<br />
+      <a id="shieldLink" href="#" target="_blank">Loading...</a>
+    </p>
+  </div>
 </body>
+<script src="script.js"></script>
 </html>
