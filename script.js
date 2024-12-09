@@ -1,42 +1,18 @@
-// script.js
-import * as THREE from 'three';
-import { gsap } from 'gsap';
+function generateShield() {
+  const label = document.getElementById("label").value || "Label";
+  const message = document.getElementById("message").value || "Message";
+  const labelColor = document.getElementById("labelColor").value || "#555";
+  const messageColor = document.getElementById("messageColor").value || "#4c1";
 
-// Configurazione scena 3D
-function create3DBackground() {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('background-3d').appendChild(renderer.domElement);
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30">
+      <rect width="75" height="30" fill="${labelColor}" />
+      <rect x="75" width="75" height="30" fill="${messageColor}" />
+      <text x="37.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${label}</text>
+      <text x="112.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${message}</text>
+    </svg>
+  `;
 
-    // Creare oggetti 3D
-    const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-    const material = new THREE.MeshStandardMaterial({ 
-        color: 0x3498db, 
-        metalness: 0.7, 
-        roughness: 0.3 
-    });
-    const torusKnot = new THREE.Mesh(geometry, material);
-    scene.add(torusKnot);
-
-    // Luci
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(5, 5, 5);
-    scene.add(ambientLight, pointLight);
-
-    camera.position.z = 30;
-
-    // Animazione
-    function animate() {
-        requestAnimationFrame(animate);
-        torusKnot.rotation.x += 0.01;
-        torusKnot.rotation.y += 0.01;
-        renderer.render(scene, camera);
-    }
-    animate();
+  // Mostra l'SVG nella pagina
+  document.getElementById("shieldPreview").innerHTML = svg;
 }
-
-window.onload = create3DBackground;
