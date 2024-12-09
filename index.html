@@ -3,51 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shield Generator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    .shield-preview {
-      margin: 20px 0;
-    }
-    input, button {
-      padding: 10px;
-      margin: 5px;
-    }
-  </style>
+  <title>Custom Shield Generator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Custom Shield Generator</h1>
-  <div>
-    <label>
-      Label:
-      <input type="text" id="label" placeholder="Enter label" />
-    </label>
-    <label>
-      Message:
-      <input type="text" id="message" placeholder="Enter message" />
-    </label>
-    <label>
-      Label Color:
-      <input type="color" id="labelColor" value="#555" />
-    </label>
-    <label>
-      Message Color:
-      <input type="color" id="messageColor" value="#4c1" />
-    </label>
-    <button onclick="generateShield()">Generate Shield</button>
+  <p>Generate your own shield by adding parameters to the URL:</p>
+  <ul>
+    <li><strong>label</strong>: The left text (e.g., <code>?label=Build</code>)</li>
+    <li><strong>message</strong>: The right text (e.g., <code>&message=Passing</code>)</li>
+    <li><strong>labelColor</strong>: Hex color for the label background (e.g., <code>&labelColor=%23ff5733</code>)</li>
+    <li><strong>messageColor</strong>: Hex color for the message background (e.g., <code>&messageColor=%234c1</code>)</li>
+  </ul>
+  <p>Example URL: <code>?label=Build&message=Passing&labelColor=%23ff5733&messageColor=%234c1</code></p>
+
+  <div id="shieldPreview">
+    <p>Loading your shield...</p>
   </div>
-  <div>
-    <h2>Your Shield</h2>
-    <div id="shieldPreview"></div>
-    <p>
-      Link to use in README.md:<br />
-      <a id="shieldLink" href="#" target="_blank">Loading...</a>
-    </p>
-  </div>
+
+  <p>
+    Link to use in README.md:<br />
+    <a id="shieldLink" href="#" target="_blank">Loading...</a>
+  </p>
+
+  <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
