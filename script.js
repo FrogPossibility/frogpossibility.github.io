@@ -1,4 +1,3 @@
-// Funzione per ottenere i parametri dall'URL
 function getQueryParams() {
   const params = new URLSearchParams(window.location.search);
   return {
@@ -9,7 +8,6 @@ function getQueryParams() {
   };
 }
 
-// Genera lo shield SVG
 function generateShield(label, message, labelColor, messageColor) {
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30">
@@ -21,7 +19,6 @@ function generateShield(label, message, labelColor, messageColor) {
   `;
 }
 
-// Funzione principale per aggiornare la pagina
 function updateShield() {
   const { label, message, labelColor, messageColor } = getQueryParams();
   const svg = generateShield(label, message, labelColor, messageColor);
@@ -29,11 +26,12 @@ function updateShield() {
   // Mostra lo shield
   document.getElementById("shieldPreview").innerHTML = svg;
 
-  // Mostra il link diretto
+  // Crea il link diretto
   const link = `${window.location.origin}${window.location.pathname}?label=${encodeURIComponent(label)}&message=${encodeURIComponent(message)}&labelColor=${encodeURIComponent(labelColor)}&messageColor=${encodeURIComponent(messageColor)}`;
-  document.getElementById("shieldLink").textContent = link;
-  document.getElementById("shieldLink").href = link;
+  const linkElement = document.getElementById("shieldLink");
+  linkElement.textContent = link;
+  linkElement.href = link;
 }
 
-// Esegui all'avvio
+// Esegui al caricamento della pagina
 updateShield();
