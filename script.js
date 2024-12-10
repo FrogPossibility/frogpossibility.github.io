@@ -22,30 +22,28 @@ function hashContent(content) {
 document.getElementById("shieldForm").addEventListener("submit", function (event) {
   event.preventDefault();
 
+  // Recupero valori dal form
   const label = document.getElementById("label").value || "Label";
   const message = document.getElementById("message").value || "Message";
   const labelColor = document.getElementById("labelColor").value || "#555";
   const messageColor = document.getElementById("messageColor").value || "#4c1";
 
+  // Generazione SVG dinamico
   const svg = generateShield(label, message, labelColor, messageColor);
 
-  // Update preview
+  // Aggiorno anteprima
   document.getElementById("shieldPreview").innerHTML = svg;
 
-  // Generate downloadable SVG link
-  const blob = new Blob([svg], { type: "image/svg+xml" });
-  const url = URL.createObjectURL(blob);
-
-  const downloadLink = document.createElement("a");
-  downloadLink.href = url;
-  downloadLink.download = `shield-${label}-${message}.svg`;
-  downloadLink.textContent = "Download SVG";
-  document.getElementById("shieldPreview").appendChild(downloadLink);
-
-  // Show Markdown link
+  // Generazione URL
   const fileName = `shields/shield-${label}-${message}.svg`;
-  const markdownLink = `![Shield](https://<tuo-username>.github.io/<repo>/${fileName})`;
-  document.getElementById("shieldLink").textContent = markdownLink;
+  const fullUrl = `https://shieldtest.vercel.app/${fileName}`;
 
+  // Mostro il link nel README
+  const markdownLink = `![Shield](${fullUrl})`;
+  document.getElementById("shieldLink").textContent = markdownLink;
+  document.getElementById("shieldLink").href = fullUrl;
+
+  console.log(`Generated link: ${fullUrl}`);
+});
   console.log("Download the file and upload it to /shields/");
 });
