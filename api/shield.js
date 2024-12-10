@@ -1,39 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300">
-  <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
-    </linearGradient>
-  </defs>
+export default function handler(req, res) { const { text = "Text" } = req.query;
 
-  <!-- Facce del cubo -->
-  <polygon points="100,100 250,100 300,200 150,200" 
-           fill="url(#gradient)" 
-           stroke="black" 
-           stroke-width="2" 
-           opacity="0.9"/>
-  
-  <polygon points="250,100 300,200 300,250 250,150" 
-           fill="url(#gradient)" 
-           stroke="black" 
-           stroke-width="2" 
-           opacity="0.7"/>
-  
-  <polygon points="100,100 150,200 150,250 100,150" 
-           fill="url(#gradient)" 
-           stroke="black" 
-           stroke-width="2" 
-           opacity="0.5"/>
+// Crea un SVG con un effetto di testo 3D, con il testo "spostato" per simulare la profondità const svg = ` <svg xmlns="http://www.w3.org/2000/svg" width="350" height="150"> <!-- Testo con effetti 3D: più versioni del testo spostate su piani Z diversi -->
 
-  <!-- Testo 3D al centro -->
-  <text x="175" y="175" 
-        font-family="Arial" 
-        font-size="40" 
-        font-weight="bold" 
-        text-anchor="middle" 
-        fill="white" 
-        stroke="black" 
-        stroke-width="1">
-    3D TEXT
-  </text>
+  <!-- Testo sul piano più lontano (profondità maggiore) -->
+  <text x="10" y="60" fill="rgba(0, 0, 0, 0.4)" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
+
+  <!-- Testo più vicino, spostato su un piano Z meno profondo -->
+  <text x="15" y="70" fill="rgba(0, 0, 0, 0.6)" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
+
+  <!-- Testo ancora più vicino -->
+  <text x="20" y="80" fill="rgba(0, 0, 0, 0.8)" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
+
+  <!-- Testo principale in bianco (in primo piano) -->
+  <text x="25" y="90" fill="#ffffff" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
 </svg>
+`;
+
+res.setHeader("Content-Type", "image/svg+xml"); res.status(200).send(svg); }
