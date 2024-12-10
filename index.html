@@ -6,7 +6,7 @@
   <title>Shield Generator</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
-    label, input, button { display: block; margin: 10px 0; }
+    label, select, button { display: block; margin: 10px 0; }
     #shieldPreview { margin: 20px 0; }
   </style>
 </head>
@@ -15,12 +15,24 @@
   <form id="shieldForm">
     <label for="label">Label:</label>
     <input type="text" id="label" placeholder="Enter label">
+    
     <label for="message">Message:</label>
     <input type="text" id="message" placeholder="Enter message">
-    <label for="labelColor">Label Color:</label>
-    <input type="color" id="labelColor" value="#555">
-    <label for="messageColor">Message Color:</label>
-    <input type="color" id="messageColor" value="#4c1">
+    
+    <label for="labelColor">Choose Label Color:</label>
+    <select id="labelColor">
+      <option value="555">Grey</option>
+      <option value="f00">Red</option>
+      <option value="00f">Blue</option>
+    </select>
+    
+    <label for="messageColor">Choose Message Color:</label>
+    <select id="messageColor">
+      <option value="4c1">Green</option>
+      <option value="ff0">Yellow</option>
+      <option value="f80">Orange</option>
+    </select>
+    
     <button type="submit">Generate Shield</button>
   </form>
 
