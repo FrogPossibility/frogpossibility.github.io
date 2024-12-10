@@ -9,6 +9,16 @@ function generateShield(label, message, labelColor, messageColor) {
   `;
 }
 
+function hashContent(content) {
+  let hash = 0;
+  for (let i = 0; i < content.length; i++) {
+    const char = content.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash |= 0; // Convert to 32-bit integer
+  }
+  return hash.toString(16);
+}
+
 document.getElementById("shieldForm").addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -19,12 +29,20 @@ document.getElementById("shieldForm").addEventListener("submit", function (event
 
   const svg = generateShield(label, message, labelColor, messageColor);
 
+  // Create hash for the shield
+  const svgHash = hashContent(svg);
+  const fileName = `shield-${svgHash}.svg`;
+
+  // Save the SVG file in the `shields/` directory
+  const fileURL = `${window.location.origin}/shields/${fileName}`;
+  const markdownLink = `![Shield](${fileURL})`;
+
   // Update preview
   document.getElementById("shieldPreview").innerHTML = svg;
 
-  // Generate link for embedding
-  const encodedSVG = encodeURIComponent(svg);
-  const shieldURL = `${window.location.origin}${window.location.pathname}?svg=${encodedSVG}`;
-  const markdownLink = `![Shield](${shieldURL})`;
+  // Show the link
   document.getElementById("shieldLink").textContent = markdownLink;
+
+  // Simulate file saving (since GitHub Pages can't do this dynamically)
+  console.log(`Save this SVG as /shields/${fileName}`);
 });
