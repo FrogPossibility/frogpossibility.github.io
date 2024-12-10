@@ -1,14 +1,22 @@
 export default function handler(req, res) {
   const { text = "Text" } = req.query;
 
-  // Crea un SVG con un effetto 3D per il testo bianco
+  // Crea un SVG con un effetto di testo 3D, con il testo "spostato" per simulare la profondità
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="350" height="100">
-      <!-- Ombra per effetto 3D -->
-      <text x="10" y="50" fill="rgba(0, 0, 0, 0.3)" font-family="Arial" font-size="40" text-anchor="start" transform="translate(3, 3)"> ${text} </text>
+    <svg xmlns="http://www.w3.org/2000/svg" width="350" height="150">
+      <!-- Testo con effetti 3D: più versioni del testo spostate su piani Z diversi -->
       
-      <!-- Testo principale in bianco -->
-      <text x="10" y="50" fill="#ffffff" font-family="Arial" font-size="40" text-anchor="start">${text}</text>
+      <!-- Testo sul piano più lontano (profondità maggiore) -->
+      <text x="10" y="60" fill="rgba(0, 0, 0, 0.4)" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
+
+      <!-- Testo più vicino, spostato su un piano Z meno profondo -->
+      <text x="15" y="70" fill="rgba(0, 0, 0, 0.6)" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
+
+      <!-- Testo ancora più vicino -->
+      <text x="20" y="80" fill="rgba(0, 0, 0, 0.8)" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
+
+      <!-- Testo principale in bianco (in primo piano) -->
+      <text x="25" y="90" fill="#ffffff" font-family="Arial" font-size="50" font-weight="bold" text-anchor="start">${text}</text>
     </svg>
   `;
 
