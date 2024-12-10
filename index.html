@@ -48,8 +48,8 @@
       // Recupero valori dal form
       const label = document.getElementById("label").value || "Label";
       const message = document.getElementById("message").value || "Message";
-      const labelColor = document.getElementById("labelColor").value.slice(1) || "555"; // Rimuove il # iniziale
-      const messageColor = document.getElementById("messageColor").value.slice(1) || "4c1"; // Rimuove il # iniziale
+      const labelColor = document.getElementById("labelColor").value || "555";
+      const messageColor = document.getElementById("messageColor").value || "4c1";
     
       // Generazione del link API
       const apiUrl = `https://shieldtest.vercel.app/api/shield?label=${encodeURIComponent(label)}&message=${encodeURIComponent(message)}&labelColor=${encodeURIComponent(labelColor)}&messageColor=${encodeURIComponent(messageColor)}`;
