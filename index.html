@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shield Generator</title>
+  <title>Text 3D Generator</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
     label, input, button { display: block; margin: 10px 0; }
@@ -13,11 +13,8 @@
 <body>
   <h1>Text 3D Generator</h1>
   <form id="shieldForm">
-    <label for="label">Label:</label>
-    <input type="text" id="label" placeholder="Enter label" required>
-    
-    <label for="message">Message:</label>
-    <input type="text" id="message" placeholder="Enter message" required>
+    <label for="text">Text:</label>
+    <input type="text" id="text" placeholder="Enter text" required>
     
     <button type="submit">Generate Text 3D Shield</button>
   </form>
@@ -30,22 +27,20 @@
   <script>
     document.getElementById("shieldForm").addEventListener("submit", function (event) {
       event.preventDefault();
-    
-      // Recupero valori dal form
-      const label = document.getElementById("label").value || "Label";
-      const message = document.getElementById("message").value || "Message";
-    
-      // Generazione del link API con testo 3D
-      const apiUrl = `https://shieldtest.vercel.app/api/shield?label=${encodeURIComponent(label)}&message=${encodeURIComponent(message)}`;
-    
+
+      // Recupero valore dal form
+      const text = document.getElementById("text").value || "Text";
+
+      // Generazione del link API con il testo
+      const apiUrl = `https://shieldtest.vercel.app/api/shield?text=${encodeURIComponent(text)}`;
+
       // Mostro il link nel README
       const markdownLink = `![Shield](${apiUrl})`;
       document.getElementById("shieldLink").textContent = markdownLink;
       document.getElementById("shieldLink").href = apiUrl;
-    
+
       console.log(`Generated API link: ${apiUrl}`);
     });
-
   </script>
 </body>
 </html>
