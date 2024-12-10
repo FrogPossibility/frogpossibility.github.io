@@ -9,15 +9,31 @@ h1 {
   color: #333;
 }
 
-#shieldPreview {
+form {
   margin: 20px 0;
 }
 
-a {
-  color: #007BFF;
-  text-decoration: none;
+label {
+  display: block;
+  margin-top: 10px;
 }
 
-a:hover {
-  text-decoration: underline;
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+#shieldPreview {
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #fff;
+}
+
+code {
+  display: block;
+  background-color: #f9f9f9;
+  padding: 5px;
+  border: 1px solid #ddd;
 }
