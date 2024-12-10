@@ -1,12 +1,16 @@
 export default function handler(req, res) {
-  const { label = "Label", message = "Message", labelColor = "#555", messageColor = "#4c1" } = req.query;
+  const { label = "Label", message = "Message" } = req.query;
 
+  // Crea un SVG con un effetto 3D usando il testo e le ombre
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30">
-      <rect width="75" height="30" fill="${labelColor}" />
-      <rect x="75" width="75" height="30" fill="${messageColor}" />
-      <text x="37.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${label}</text>
-      <text x="112.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${message}</text>
+    <svg xmlns="http://www.w3.org/2000/svg" width="350" height="100">
+      <!-- Ombre per effetto 3D -->
+      <text x="10" y="40" fill="rgba(0, 0, 0, 0.2)" font-family="Arial" font-size="30" text-anchor="start" transform="translate(2, 2)"> ${label} </text>
+      <text x="10" y="70" fill="rgba(0, 0, 0, 0.2)" font-family="Arial" font-size="30" text-anchor="start" transform="translate(2, 2)"> ${message} </text>
+      
+      <!-- Testo principale -->
+      <text x="10" y="40" fill="#000000" font-family="Arial" font-size="30" text-anchor="start">${label}</text>
+      <text x="10" y="70" fill="#000000" font-family="Arial" font-size="30" text-anchor="start">${message}</text>
     </svg>
   `;
 
