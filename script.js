@@ -29,20 +29,23 @@ document.getElementById("shieldForm").addEventListener("submit", function (event
 
   const svg = generateShield(label, message, labelColor, messageColor);
 
-  // Create hash for the shield
-  const svgHash = hashContent(svg);
-  const fileName = `shield-${svgHash}.svg`;
-
-  // Save the SVG file in the `shields/` directory
-  const fileURL = `${window.location.origin}/shields/${fileName}`;
-  const markdownLink = `![Shield](${fileURL})`;
-
   // Update preview
   document.getElementById("shieldPreview").innerHTML = svg;
 
-  // Show the link
+  // Generate downloadable SVG link
+  const blob = new Blob([svg], { type: "image/svg+xml" });
+  const url = URL.createObjectURL(blob);
+
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = `shield-${label}-${message}.svg`;
+  downloadLink.textContent = "Download SVG";
+  document.getElementById("shieldPreview").appendChild(downloadLink);
+
+  // Show Markdown link
+  const fileName = `shields/shield-${label}-${message}.svg`;
+  const markdownLink = `![Shield](https://<tuo-username>.github.io/<repo>/${fileName})`;
   document.getElementById("shieldLink").textContent = markdownLink;
 
-  // Simulate file saving (since GitHub Pages can't do this dynamically)
-  console.log(`Save this SVG as /shields/${fileName}`);
+  console.log("Download the file and upload it to /shields/");
 });
