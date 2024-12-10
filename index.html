@@ -6,34 +6,20 @@
   <title>Shield Generator</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
-    label, select, button { display: block; margin: 10px 0; }
+    label, input, button { display: block; margin: 10px 0; }
     #shieldPreview { margin: 20px 0; }
   </style>
 </head>
 <body>
-  <h1>Shield Generator</h1>
+  <h1>Text 3D Generator</h1>
   <form id="shieldForm">
     <label for="label">Label:</label>
-    <input type="text" id="label" placeholder="Enter label">
+    <input type="text" id="label" placeholder="Enter label" required>
     
     <label for="message">Message:</label>
-    <input type="text" id="message" placeholder="Enter message">
+    <input type="text" id="message" placeholder="Enter message" required>
     
-    <label for="labelColor">Choose Label Color:</label>
-    <select id="labelColor">
-      <option value="555">Grey</option>
-      <option value="f00">Red</option>
-      <option value="00f">Blue</option>
-    </select>
-    
-    <label for="messageColor">Choose Message Color:</label>
-    <select id="messageColor">
-      <option value="4c1">Green</option>
-      <option value="ff0">Yellow</option>
-      <option value="f80">Orange</option>
-    </select>
-    
-    <button type="submit">Generate Shield</button>
+    <button type="submit">Generate Text 3D Shield</button>
   </form>
 
   <p>
@@ -48,11 +34,9 @@
       // Recupero valori dal form
       const label = document.getElementById("label").value || "Label";
       const message = document.getElementById("message").value || "Message";
-      const labelColor = document.getElementById("labelColor").value || "555";
-      const messageColor = document.getElementById("messageColor").value || "4c1";
     
-      // Generazione del link API
-      const apiUrl = `https://shieldtest.vercel.app/api/shield?label=${encodeURIComponent(label)}&message=${encodeURIComponent(message)}&labelColor=${encodeURIComponent(labelColor)}&messageColor=${encodeURIComponent(messageColor)}`;
+      // Generazione del link API con testo 3D
+      const apiUrl = `https://shieldtest.vercel.app/api/shield?label=${encodeURIComponent(label)}&message=${encodeURIComponent(message)}`;
     
       // Mostro il link nel README
       const markdownLink = `![Shield](${apiUrl})`;
