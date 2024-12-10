@@ -8,22 +8,35 @@
 </head>
 <body>
   <h1>Custom Shield Generator</h1>
-  <p>Generate your own shield by adding parameters to the URL:</p>
-  <ul>
-    <li><strong>label</strong>: The left text (e.g., <code>?label=Build</code>)</li>
-    <li><strong>message</strong>: The right text (e.g., <code>&message=Passing</code>)</li>
-    <li><strong>labelColor</strong>: Hex color for the label background (e.g., <code>&labelColor=%23ff5733</code>)</li>
-    <li><strong>messageColor</strong>: Hex color for the message background (e.g., <code>&messageColor=%234c1</code>)</li>
-  </ul>
-  <p>Example URL: <code>?label=Build&message=Passing&labelColor=%23ff5733&messageColor=%234c1</code></p>
+  <p>Generate your shield by filling in the form below:</p>
+
+  <form id="shieldForm">
+    <label for="label">Label:</label>
+    <input type="text" id="label" name="label" placeholder="Label" required>
+    <br />
+
+    <label for="message">Message:</label>
+    <input type="text" id="message" name="message" placeholder="Message" required>
+    <br />
+
+    <label for="labelColor">Label Color:</label>
+    <input type="color" id="labelColor" name="labelColor" value="#555555">
+    <br />
+
+    <label for="messageColor">Message Color:</label>
+    <input type="color" id="messageColor" name="messageColor" value="#4c1">
+    <br />
+
+    <button type="submit">Generate Shield</button>
+  </form>
 
   <div id="shieldPreview">
-    <p>Loading your shield...</p>
+    <p>Preview of your shield will appear here...</p>
   </div>
 
   <p>
     Link to use in README.md:<br />
-    <a id="shieldLink" href="#" target="_blank">Loading...</a>
+    <code id="shieldLink">Generate your shield to see the link here...</code>
   </p>
 
   <script src="script.js"></script>
