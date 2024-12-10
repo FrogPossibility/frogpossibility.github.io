@@ -24,49 +24,30 @@
     <button type="submit">Generate Shield</button>
   </form>
 
-  <div id="shieldPreview"></div>
   <p>
     Markdown link for README: 
     <a id="shieldLink" href="#" target="_blank">Generate Shield Link</a>
   </p>
 
   <script>
-    function generateShield(label, message, labelColor, messageColor) {
-      return `
-        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30">
-          <rect width="75" height="30" fill="${labelColor}" />
-          <rect x="75" width="75" height="30" fill="${messageColor}" />
-          <text x="37.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${label}</text>
-          <text x="112.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${message}</text>
-        </svg>
-      `;
-    }
-
     document.getElementById("shieldForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-  
-    // Recupero valori dal form
-    const label = document.getElementById("label").value || "Label";
-    const message = document.getElementById("message").value || "Message";
-    const labelColor = document.getElementById("labelColor").value || "#555";
-    const messageColor = document.getElementById("messageColor").value || "#4c1";
-  
-    // Generazione SVG dinamico
-    const svg = generateShield(label, message, labelColor, messageColor);
-  
-    // Aggiorno anteprima
-    document.getElementById("shieldPreview").innerHTML = svg;
-  
-    // Generazione URL
-    const fileName = `shields/shield-${label}-${message}.svg`;
-    const fullUrl = `https://shieldtest.vercel.app/${fileName}`;
-  
-    // Mostro il link nel README
-    const markdownLink = `![Shield](${fullUrl})`;
-    document.getElementById("shieldLink").textContent = markdownLink;
-    document.getElementById("shieldLink").href = fullUrl;
-  
-    console.log(`Generated link: ${fullUrl}`);
+      event.preventDefault();
+    
+      // Recupero valori dal form
+      const label = document.getElementById("label").value || "Label";
+      const message = document.getElementById("message").value || "Message";
+      const labelColor = document.getElementById("labelColor").value.slice(1) || "555"; // Rimuove il # iniziale
+      const messageColor = document.getElementById("messageColor").value.slice(1) || "4c1"; // Rimuove il # iniziale
+    
+      // Generazione del link API
+      const apiUrl = `https://shieldtest.vercel.app/api/shield?label=${encodeURIComponent(label)}&message=${encodeURIComponent(message)}&labelColor=${encodeURIComponent(labelColor)}&messageColor=${encodeURIComponent(messageColor)}`;
+    
+      // Mostro il link nel README
+      const markdownLink = `![Shield](${apiUrl})`;
+      document.getElementById("shieldLink").textContent = markdownLink;
+      document.getElementById("shieldLink").href = apiUrl;
+    
+      console.log(`Generated API link: ${apiUrl}`);
     });
 
   </script>
