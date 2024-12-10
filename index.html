@@ -3,42 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Shield Generator</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Shield Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    label, input, button { display: block; margin: 10px 0; }
+    #shieldPreview { margin: 20px 0; }
+  </style>
 </head>
 <body>
-  <h1>Custom Shield Generator</h1>
-  <p>Generate your shield by filling in the form below:</p>
-
+  <h1>Shield Generator</h1>
   <form id="shieldForm">
     <label for="label">Label:</label>
-    <input type="text" id="label" name="label" placeholder="Label" required>
-    <br />
-
+    <input type="text" id="label" placeholder="Enter label">
     <label for="message">Message:</label>
-    <input type="text" id="message" name="message" placeholder="Message" required>
-    <br />
-
+    <input type="text" id="message" placeholder="Enter message">
     <label for="labelColor">Label Color:</label>
-    <input type="color" id="labelColor" name="labelColor" value="#555555">
-    <br />
-
+    <input type="color" id="labelColor" value="#555">
     <label for="messageColor">Message Color:</label>
-    <input type="color" id="messageColor" name="messageColor" value="#4c1">
-    <br />
-
+    <input type="color" id="messageColor" value="#4c1">
     <button type="submit">Generate Shield</button>
   </form>
 
-  <div id="shieldPreview">
-    <p>Preview of your shield will appear here...</p>
-  </div>
-
+  <div id="shieldPreview"></div>
   <p>
-    Link to use in README.md:<br />
-    <code id="shieldLink">Generate your shield to see the link here...</code>
+    Markdown link for README: 
+    <a id="shieldLink" href="#" target="_blank">Generate Shield Link</a>
   </p>
 
-  <script src="script.js"></script>
+  <script>
+    function generateShield(label, message, labelColor, messageColor) {
+      return `
+        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30">
+          <rect width="75" height="30" fill="${labelColor}" />
+          <rect x="75" width="75" height="30" fill="${messageColor}" />
+          <text x="37.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${label}</text>
+          <text x="112.5" y="20" fill="#fff" font-family="Arial" font-size="14" text-anchor="middle">${message}</text>
+        </svg>
+      `;
+    }
+
+    document.getElementById("shieldForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+  
+    // Recupero valori dal form
+    const label = document.getElementById("label").value || "Label";
+    const message = document.getElementById("message").value || "Message";
+    const labelColor = document.getElementById("labelColor").value || "#555";
+    const messageColor = document.getElementById("messageColor").value || "#4c1";
+  
+    // Generazione SVG dinamico
+    const svg = generateShield(label, message, labelColor, messageColor);
+  
+    // Aggiorno anteprima
+    document.getElementById("shieldPreview").innerHTML = svg;
+  
+    // Generazione URL
+    const fileName = `shields/shield-${label}-${message}.svg`;
+    const fullUrl = `https://shieldtest.vercel.app/${fileName}`;
+  
+    // Mostro il link nel README
+    const markdownLink = `![Shield](${fullUrl})`;
+    document.getElementById("shieldLink").textContent = markdownLink;
+    document.getElementById("shieldLink").href = fullUrl;
+  
+    console.log(`Generated link: ${fullUrl}`);
+    });
+
+  </script>
 </body>
 </html>
