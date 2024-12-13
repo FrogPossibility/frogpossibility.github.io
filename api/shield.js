@@ -5,7 +5,7 @@ export default function handler(req, res) {
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="300" height="100">
       <!-- Testo principale -->
-      <text x="10" y="40" fill="#4A90E2" font-family="Arial" font-size="40" font-weight="bold" text-anchor="start">${text}</text>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     </svg>
   `;
 
