@@ -1,39 +1,34 @@
+/* stile.css */
+
+/* Stile per il corpo della pagina */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;
 }
 
+/* Stile per i titoli */
 h1 {
-  color: #333;
+    color: #2c3e50;
 }
 
-form {
-  margin: 20px 0;
+h2 {
+    color: #34495e;
 }
 
-label {
-  display: block;
-  margin-top: 10px;
+/* Stile per i paragrafi */
+p {
+    line-height: 1.6;
 }
 
-input {
-  margin-bottom: 10px;
-  padding: 5px;
-  font-size: 14px;
+/* Stile per i link */
+a {
+    color: #2980b9;
+    text-decoration: none;
 }
 
-#shieldPreview {
-  margin: 20px 0;
-  border: 1px solid #ddd;
-  padding: 10px;
-  background-color: #fff;
-}
-
-code {
-  display: block;
-  background-color: #f9f9f9;
-  padding: 5px;
-  border: 1px solid #ddd;
+a:hover {
+    text-decoration: underline;
 }
