@@ -1,36 +1,46 @@
 export default function handler(req, res) {
   const { text = "Text" } = req.query;
 
-  // Creazione dell'SVG con l'effetto 3D per ogni lettera
+  // Funzione che crea l'effetto cubico per ogni lettera
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="150">
-      <!-- Creazione dell'effetto 3D per ogni lettera -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="150">
+      <!-- Creazione dell'effetto cubico per ogni lettera -->
       ${Array.from(text).map((letter, index) => {
-        const xOffset = index * 50; // Spostamento orizzontale per ogni lettera
-        const depth = 10; // Profondità della lettera lungo l'asse Z
+        const xOffset = index * 60; // Spostamento orizzontale per ogni lettera
+        const depth = 15; // Profondità della lettera (lato z)
 
-        // Le lettere principali
-        const letterFront = `<text x="${xOffset}" y="50" fill="#ffffff" font-family="Arial" font-size="40" font-weight="bold" text-anchor="start">${letter}</text>`;
+        // La posizione dei vertici per simulare un cubo
+        const topLeft = { x: xOffset, y: 50 }; // Angolo superiore sinistro
+        const topRight = { x: xOffset + 30, y: 50 }; // Angolo superiore destro
+        const bottomLeft = { x: xOffset, y: 80 }; // Angolo inferiore sinistro
+        const bottomRight = { x: xOffset + 30, y: 80 }; // Angolo inferiore destro
 
-        // Le facce laterali (simulazione dell'effetto cubo)
-        const letterSide1 = `<text x="${xOffset + depth}" y="50" fill="#cccccc" font-family="Arial" font-size="40" font-weight="bold" text-anchor="start">${letter}</text>`;
-        const letterSide2 = `<text x="${xOffset + depth}" y="60" fill="#aaaaaa" font-family="Arial" font-size="40" font-weight="bold" text-anchor="start">${letter}</text>`;
+        // Lato Z (profondità)
+        const topLeftZ = { x: xOffset + depth, y: 40 }; // Angolo in profondità superiore sinistro
+        const topRightZ = { x: xOffset + 30 + depth, y: 40 }; // Angolo in profondità superiore destro
+        const bottomLeftZ = { x: xOffset + depth, y: 70 }; // Angolo in profondità inferiore sinistro
+        const bottomRightZ = { x: xOffset + 30 + depth, y: 70 }; // Angolo in profondità inferiore destro
 
-        // Aggiungi linee per simulare i bordi del cubo
-        const sideLine1 = `<line x1="${xOffset}" y1="50" x2="${xOffset + depth}" y2="50" stroke="#888888" stroke-width="2"/>`;
-        const sideLine2 = `<line x1="${xOffset}" y1="50" x2="${xOffset + depth}" y2="60" stroke="#888888" stroke-width="2"/>`;
-
+        // Disegnare le facce del cubo con linee per i lati
         return `
-          <!-- Testo frontale -->
-          ${letterFront}
-
-          <!-- Testo laterale per l'effetto cubo -->
-          ${letterSide1}
-          ${letterSide2}
-
-          <!-- Linee per i bordi laterali -->
-          ${sideLine1}
-          ${sideLine2}
+          <!-- Corpo principale della lettera (parte frontale) -->
+          <text x="${topLeft.x}" y="${topLeft.y + 10}" fill="#ffffff" font-family="Arial" font-size="40" font-weight="bold" text-anchor="start">${letter}</text>
+          
+          <!-- Lato laterale sinistro -->
+          <polygon points="${topLeft.x},${topLeft.y} ${topLeftZ.x},${topLeftZ.y} ${bottomLeftZ.x},${bottomLeftZ.y} ${bottomLeft.x},${bottomLeft.y}" fill="#cccccc"/>
+          
+          <!-- Lato laterale destro -->
+          <polygon points="${topRight.x},${topRight.y} ${topRightZ.x},${topRightZ.y} ${bottomRightZ.x},${bottomRightZ.y} ${bottomRight.x},${bottomRight.y}" fill="#aaaaaa"/>
+          
+          <!-- Linee di connessione per formare l'effetto cubo -->
+          <line x1="${topLeft.x}" y1="${topLeft.y}" x2="${topLeftZ.x}" y2="${topLeftZ.y}" stroke="#888888" stroke-width="2"/>
+          <line x1="${topRight.x}" y1="${topRight.y}" x2="${topRightZ.x}" y2="${topRightZ.y}" stroke="#888888" stroke-width="2"/>
+          <line x1="${bottomLeft.x}" y1="${bottomLeft.y}" x2="${bottomLeftZ.x}" y2="${bottomLeftZ.y}" stroke="#888888" stroke-width="2"/>
+          <line x1="${bottomRight.x}" y1="${bottomRight.y}" x2="${bottomRightZ.x}" y2="${bottomRightZ.y}" stroke="#888888" stroke-width="2"/>
+          
+          <!-- Linee di collegamento per i lati in profondità -->
+          <line x1="${topLeftZ.x}" y1="${topLeftZ.y}" x2="${topRightZ.x}" y2="${topRightZ.y}" stroke="#888888" stroke-width="2"/>
+          <line x1="${bottomLeftZ.x}" y1="${bottomLeftZ.y}" x2="${bottomRightZ.x}" y2="${bottomRightZ.y}" stroke="#888888" stroke-width="2"/>
         `;
       }).join('')}
     </svg>
